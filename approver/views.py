@@ -25,7 +25,7 @@ from django.contrib.auth.decorators import permission_required
 def list_tweets(request):
     pending_tweets = Tweet.objects.filter(state='pending').order_by('create_at')
     published_tweets = Tweet.objects.filter(state='published').order_by('-published_at')
-    return render_to_response('list_tweets.html',{'pending_tweets':pending_tweets,'published_tweets':published_tweets})
+    return render_to_response('list_tweet.html',{'pending_tweets':pending_tweets,'published_tweets':published_tweets})
 
 #审视表单
 class ReviewForm(forms.Form):

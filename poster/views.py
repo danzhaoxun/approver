@@ -36,14 +36,11 @@ def post_tweet(request,tweet_id=None):
             new_tweet.state = 'pending'
             new_tweet.save()
             #send_review_email()
-            return HttpResponseRedirect('/post/thankyou')
+            return HttpResponseRedirect('/poster/thankyou')
     else:
         form = TweetForm(instance=tweet)
     return render_to_response('post_tweet.html',{'form':form},RequestContext(request))
 
 def thankyou(request):
-    assert isinstance(Tweet.objects.filter(
-        state='pending').aggregate(Count('id')).values, )
-    tweets_in_queue = Tweet.objects.filter(
-        state = 'pending').aggregate(Count('id')).values()[0]
-    return render_to_response('than_you.html', {'tweet_in_queue': tweets_in_queue}, RequestContext(request))
+    tweets_in_queue = Tweet.objects.filter(state = 'pending').aggregate(Count('id')).values()
+    return render_to_response('thank_you.html', {'tweet_in_queue': tweets_in_queue}, RequestContext(request))

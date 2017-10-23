@@ -20,6 +20,7 @@ from django.contrib.auth.views import login
 from poster import urls as poster_urls
 from approver import urls as approver_ulrs
 import django.contrib.auth.views
+from poster.views import post_tweet,thankyou
 
 
 admin.autodiscover()
@@ -27,9 +28,10 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^poster/',include(poster_urls)),
-    url(r'^$',include(poster_urls)),
-    url(r'^approve/',include(approver_ulrs)),
+    url(r'^poster/thankyou',thankyou),
+    url(r'^poster/$',post_tweet),
+    url(r'^poster/create/',post_tweet),
+    url(r'^approver/',include(approver_ulrs)),
     url(r'^login',login,name='login'),
     url(r'^logout',django.contrib.auth.views.logout),
 ]
