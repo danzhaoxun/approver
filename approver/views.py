@@ -23,7 +23,7 @@ from django.contrib.auth.decorators import permission_required
 
 #列举推特数据
 def list_tweets(request):
-    pending_tweets = Tweet.objects.filter(state='pending').order_by('create_at')
+    pending_tweets = Tweet.objects.filter(state='pending').order_by('created_at')
     published_tweets = Tweet.objects.filter(state='published').order_by('-published_at')
     return render_to_response('list_tweet.html',{'pending_tweets':pending_tweets,'published_tweets':published_tweets})
 
@@ -55,7 +55,7 @@ def review_tweet(request,tweet_id):
             if new_comment:
                 c = Comment(tweet=reviewed_tweet,text=new_comment)
                 c.save()
-            return HttpResponseRedirect('/approve')
+            return HttpResponseRedirect('/approver')
     else:
         form = ReviewForm()
     return render_to_response('review_tweet.html',{'form':form,'tweet':reviewed_tweet,'comments':reviewed_tweet.comment_set.all()},RequestContext(request))

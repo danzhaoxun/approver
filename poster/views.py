@@ -42,5 +42,8 @@ def post_tweet(request,tweet_id=None):
     return render_to_response('post_tweet.html',{'form':form},RequestContext(request))
 
 def thankyou(request):
-    tweets_in_queue = Tweet.objects.filter(state = 'pending').aggregate(Count('id')).values()
-    return render_to_response('thank_you.html', {'tweet_in_queue': tweets_in_queue}, RequestContext(request))
+    #tweets_in_queue = Tweet.objects.filter(state = 'pending').aggregate(Count('id')).values()  错误语句
+    #logging.error('thankyou')
+    tweets_in_queue = Tweet.objects.all().filter(state = 'pending').aggregate(Count('id')).get('id__count')
+    logging.debug('tweets_in_queue:%d',tweets_in_queue)
+    return render_to_response('thank_you.html', {'tweets_in_queue': tweets_in_queue}, RequestContext(request))

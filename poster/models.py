@@ -19,7 +19,7 @@ class Tweet(models.Model):
         ('rejected','rejected'),
     )
     #推文状态
-    state = models.CharField(max_length=15,choices=STATE_CHOICES)
+    state  = models.CharField(max_length=15,choices=STATE_CHOICES)
     #告知django在管理的web站点中显示每个Tweet对象的text属性
     def __unicode__(self):
         return self.text

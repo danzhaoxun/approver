@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% form.errors %}
-       Your username and password didn't match.Please try again.
-     {% endif %}
+    Your username and password didn't match.Please try again.
     <form method="post" action="% url django.contrib.auth.views.login %"> {% csrf_token %}
         <table>
             <tr>

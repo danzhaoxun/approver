@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'zh-hans'  #en-us
 
-TIME_ZONE = 'Aria/Beijing'  #UTC   Aria/shenzhen
+TIME_ZONE = 'UTC'  #UTC   Aria/shenzhen  Aria/Beijing
 
 USE_I18N = True
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-< lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Pending and published tweets</title>
@@ -12,43 +12,53 @@
     }
     </style>
 </head>
-<table>
+<center>
+<table width="100%" height="100%" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <td colspan="2" align="center">
-            <b>Pending tweets</b>>
+            <b>Pending tweets</b>
     </tr>
     <tr>
         <td>
+            <center>
             Tweet text
+            </center>
         </td>
-        <td>
+        <td width="10%">
+            <center>
             Submitted
+            </center>
         </td>>
     </tr>
-    {% for tweet in pending_tweet %}
+    {% for tweet in pending_tweets %}
     <tr class="{% cycle 'oddrow' 'evenrow' %}">
         <td>
-            <a href="/approve/review/{{tweet.id}}">{{tweet.text}}</a>
+            <a href="/approver/review/{{tweet.id}}">{{tweet.text}}</a>
         </td>
-        <td>
+        <td width="10%">
         {{tweet.created_at|timesince}} ago
         </td>
     </tr>
     {% endfor %}
 </table>
 <hr>
-<table>
+    <center>
+<table width="100%" height="100%" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <td colspan="2" align="center">
-            <b Published tweets></b>
+            <b> Published tweets</b>
         </td>
     </tr>
     <tr>
         <td>
+            <center>
             Tweet text
-        <td>
-        <td>
+            </center>
+        </td>
+        <td width="10%">
+            <center>
             Published
+            </center>
         </td>
     </tr>
     {% for tweet in published_tweets %}
@@ -56,10 +66,12 @@
         <td>
             {{tweet.text}}
         </td>
-        <td>
+        <td width="10%">
             {{tweet.published_at|timesince}} ago
         </td>
     </tr>>
     {% endfor %}
-</table>>
+</table>
+    </center>
+</center>>
 </html>
