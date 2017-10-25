@@ -29,12 +29,12 @@ def list_tweets(request):
 
 #审视表单
 class ReviewForm(forms.Form):
-    new_comment = forms.CharField(max_length=300,widget=forms.Textarea(attrs={'cols':50,'rows':6}),required=False)
+    new_comment = forms.CharField(max_length=300,widget=forms.Textarea(attrs={'cols':50,'rows':6}),required=False) #给表单命名，同时设置属性
     APPROVAL_CHOICES = (
         ('approve','Approve this tweet and post it to Twitter'),
         ('reject','Reject this tweet and send ti back to the authoer with your comment'),
     )
-    approval = forms.ChoiceField(choices=APPROVAL_CHOICES,widget=forms.RadioSelect)
+    approval = forms.ChoiceField(choices=APPROVAL_CHOICES,widget=forms.RadioSelect)   #RadioSelect 单选按钮
 
 @permission_required('poster.can_approve_or_reject_tweet',login_url='/login')
 
@@ -44,7 +44,7 @@ def review_tweet(request,tweet_id):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            new_comment = form.cleaned_data['new_comment']
+            new_comment = form.cleaned_data['new_comment'] #读取名为‘new_comment’的表单值，并表表单值给‘new_comment'
             if form.cleaned_data['approval'] == 'approve':
                 reviewed_tweet.published_at = datetime.now()
                 reviewed_tweet.state = 'published'

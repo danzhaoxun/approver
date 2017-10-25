@@ -20,16 +20,22 @@ class TweetForm(forms.ModelForm):
             'text':forms.Textarea(attrs={'cols':50,'rows':3})
         }
 
+"""
+get_object_or_404的介绍： 我们原来调用django 的get方法，如果查询的对象不存在的话，会抛出一个DoesNotExist的
+异常， 现在我们调用django get_object_or_404方法，它会默认的调用django 的get方法， 如果查询的对象不存在的话，
+会抛出一个Http404的异常，我感觉这样对用户比较友好， 如果用户查询某个产品不存在的话，我们就显示404的页面给用户，
+比直接显示异常好。
+"""
 
-def post_tweet(request,tweet_id=None):
+def post_tweet(request,tweet_id=None):                  #这个tweet_id这个名称可以换成其他的  在这里调用的两次都为None
     tweet = None
     logging.debug('post tweet')
     logging.info('tweet_id:%s',tweet_id)
     if tweet_id:
-        tweet = get_object_or_404(Tweet,id=tweet_id)
+        tweet = get_object_or_404(Tweet,id=tweet_id)    #在这个方法中这句始终没有运行
     if request.method == 'POST':
         logging.debug('method post')
-        form = TweetForm(request.POST,instance=tweet)
+        form = TweetForm(request.POST,instance=tweet)   #缺少request.POST, 页面将不能够跳转  request.POST中有提交的数据
         if form.is_valid():
             logging.debug('is valid')
             new_tweet = form.save(commit=False)

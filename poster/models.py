@@ -36,7 +36,7 @@ class Comment(models.Model):
     #评论推特文本
     text = models.CharField(max_length=300)
     #评论时间
-    create_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.text
