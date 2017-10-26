@@ -12,6 +12,8 @@ class Tweet(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     #推文审核时间(允许publish_at的字段为null)
     published_at = models.DateTimeField(null = True)
+    #推文拒绝时间
+    rejected_at = models.DateTimeField(null = True)
     #推文的三种状态
     STATE_CHOICES = (
         ('pending','pending'),

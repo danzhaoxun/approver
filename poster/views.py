@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 from myproject import settings
 from poster.models import Tweet
 import logging
+from poster.models import Tweet,Comment
 # Create your views here.
 
 
@@ -45,7 +46,10 @@ def post_tweet(request,tweet_id=None):                  #这个tweet_id这个名
             return HttpResponseRedirect('/poster/thankyou')
     else:
         form = TweetForm(instance=tweet)
-    return render_to_response('post_tweet.html',{'form':form},RequestContext(request))
+        pending_tweets = Tweet.objects.filter(state = 'pending').order_by('created_at')
+        published_tweets = Tweet.objects.filter(state = 'published').order_by('-published_at')
+        rejected_tweets = Tweet.objects.filter(state = 'rejected').order_by('-rejected_at')
+    return render_to_response('post_tweet.html',{'form':form,'pending_tweets':pending_tweets,'published_tweets':published_tweets,'rejected_tweets':rejected_tweets},RequestContext(request))
 
 def thankyou(request):
     #tweets_in_queue = Tweet.objects.filter(state = 'pending').aggregate(Count('id')).values()  错误语句
