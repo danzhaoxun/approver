@@ -57,3 +57,9 @@ def thankyou(request):
     tweets_in_queue = Tweet.objects.all().filter(state = 'pending').aggregate(Count('id')).get('id__count')
     logging.debug('tweets_in_queue:%d',tweets_in_queue)
     return render_to_response('thank_you.html', {'tweets_in_queue': tweets_in_queue}, RequestContext(request))
+
+
+#重审推特
+def review_data_tweet(request,tweet_id):
+    reviewed_tweet = get_object_or_404(Tweet,id=tweet_id)
+    return render_to_response('review_edit.html',{'tweet':reviewed_tweet,'comments':reviewed_tweet.comment_set.all()},RequestContext(request))

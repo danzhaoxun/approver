@@ -59,7 +59,7 @@
     {% for tweet in published_tweets %}
     <tr>
     <td>
-        {{tweet.text}}
+        <a href="/poster/repubcom/{{tweet.id}}">{{tweet.text}}</a>
     </td>
     <td width="10%">
         {{tweet.published_at|timesince}} ago
@@ -88,7 +88,7 @@
     {% for tweet in rejected_tweets %}
     <tr>
     <td>
-        {{tweet.text}}
+        <a href="/poster/rerejcom/{{tweet.id}}">{{tweet.text}}</a>
     </td>
     <td width="10%">
         {{tweet.published_at|timesince}} ago

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+</head>
+<body>  {% csrf_token %}
+    <center>
+<table width="100%" height="100%" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td colspan="2" align="center">
+            <b> Comments</b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <center>
+            Tweet text
+            </center>
+        </td>
+        <td width="10%">
+            <center>
+            datetime
+            </center>
+        </td>
+    </tr>
+   {% for comment in comments %}
+    <tr>
+        <td>
+            {{comment.text}}
+        </td>
+        <td width="10%">
+           <i>{{comment.created_at|timesince}} ago:</i>
+        </td>
+    </tr>>
+    {% endfor %}
+</table>
+    </center>
+</body>
+</html>
